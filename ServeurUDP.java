@@ -29,7 +29,7 @@ public class ServeurUDP implements Runnable{
                 serverSocket.receive(receivePacket);
                 String dataReceived = new String(receivePacket.getData());
                 if(!dataReceived.startsWith(Protocole.prefixSendDataRequest))
-                  continue;
+                    continue;
                 dataReceived = dataReceived.substring(Protocole.prefixSendDataRequest.length(), dataReceived.length());
                 InetAddress ipAddressSender = receivePacket.getAddress();
                 String addresseClientActuel = ipAddressSender.getHostAddress();
@@ -42,7 +42,7 @@ public class ServeurUDP implements Runnable{
                     System.out.println("\nDOWNLOAD COMPLETED... -> STOPPING SERVEUR...");
                     System.exit(0);
                     break;
-                }   
+                }
             }
         }
         catch(SocketException se){ se.printStackTrace(); }

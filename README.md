@@ -1,5 +1,6 @@
 # ProtRes
 
+
 ## Usage: 
 
 * Démarrer en premier le Serveur:
@@ -17,3 +18,5 @@ Each pair has an information to share, in this software a text, let's say his ow
 ## Evolution
 
 A few modifications to the code could make this software easily evoluate to support other format of data exchange, including our personal pictures, audio or video content. In this case, the automatic process of sharing implemented here should be changed to allow the pair to choose the file to get and which pair to download from. 
+
+

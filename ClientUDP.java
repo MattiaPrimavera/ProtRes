@@ -1,7 +1,7 @@
 import java.net.*;
 import java.util.Scanner;
 
-//Partie UDP du client charge' de l'envoie des donnees aux autres clients 
+//Partie UDP du client charge' de l'envoie des donnees aux autres clients
 public class ClientUDP{
     private int udpPort;
     private String toSend;
@@ -26,6 +26,5 @@ public class ClientUDP{
         }
         catch(SocketException se){ se.printStackTrace(); }
         catch(Exception e){ e.printStackTrace(); }
-	}
+    }
 }
-
