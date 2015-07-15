@@ -30,7 +30,7 @@ public class ClientTCP implements Runnable{
 			this.demarrePartage();
 			this.waitForUpdates();
 		}//si on est le premier client a se connecter on s'attend pas une liste des clients connectes
-		else 
+		else
 			this.waitForUpdates();
 	}
 
@@ -43,19 +43,19 @@ public class ClientTCP implements Runnable{
 				in = new BufferedReader(new InputStreamReader(this.s.getInputStream()));
 				while(true){
 					tmp = in.readLine();
-					if(!tmp.startsWith(Protocole.prefixUpdateRequest)) continue; 
+					if(!tmp.startsWith(Protocole.prefixUpdateRequest)) continue;
 					String [] informationClient = new String[2];
 					informationClient = Protocole.biSplit(tmp.substring(Protocole.prefixUpdateRequest.length(), tmp.length()), '#');
-						
+
 					if(tmp.equals(Protocole.clientListEnd)) continue;
 					ClientInfo tmpInfo = new ClientInfo(informationClient[0], Integer.parseInt(informationClient[1]));
 					ClientUDP udpClient = new ClientUDP(tmpInfo.getUdpServerPort(), tmpInfo.getAddress(), this.donnees);
 					udpClient.sendData();
 				}
 			}
-			catch(NullPointerException npe){ 
+			catch(NullPointerException npe){
 				System.out.println("\nSERVER CONNECTION LOST...\nSTOPPING EXECUTION...");
-				System.exit(0); 
+				System.exit(0);
 			}
 			catch(SocketException se){ se.printStackTrace(); }
 			catch(IOException e){ e.printStackTrace(); }
@@ -99,7 +99,7 @@ public class ClientTCP implements Runnable{
 		catch(SocketException se){ se.printStackTrace(); }
 		catch(IOException e){ e.printStackTrace(); }
 
-		//remplissage liste des client sous forme d'objets ClientInfo		
+		//remplissage liste des client sous forme d'objets ClientInfo
 		for(String s : listeClientsStr){
 			String [] informationClient = new String[2];
 			informationClient = Protocole.biSplit(s, '#');
@@ -108,14 +108,14 @@ public class ClientTCP implements Runnable{
 		return clientNumber;
 	}
 
-	//tentatif de connexion au ServeurCentrale pour recevoir la liste clients connectes 
+	//tentatif de connexion au ServeurCentrale pour recevoir la liste clients connectes
 	public int connect(){
-    	try{
-    	   	PrintWriter pw = new PrintWriter(new OutputStreamWriter(this.s.getOutputStream()));
-	    	pw.println(Protocole.connectToServer(udpServerPort));
-	    	pw.flush();
-    	}
-    	catch(Exception e){ e.printStackTrace(); }
-    	return this.getContactsInfo();
-    }
-}	
+		try{
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(this.s.getOutputStream()));
+			pw.println(Protocole.connectToServer(udpServerPort));
+			pw.flush();
+		}
+		catch(Exception e){ e.printStackTrace(); }
+		return this.getContactsInfo();
+	}
+}

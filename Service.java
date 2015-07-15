@@ -16,16 +16,16 @@ class Service implements Runnable, Observable{
 		actuelClientInfo = "";
 		if((this.listeClients = contactList) == null)
 			this.listeClients = new ArrayList<String>();
-	}	
+	}
 	public void run(){
 		while(true){
 			try{
 				//On attends la requete du client...
 				BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 				String request = in.readLine();
-				if(!request.startsWith(Protocole.prefixConnectRequest) && !request.startsWith(Protocole.prefixDeconnectRequest)) 
+				if(!request.startsWith(Protocole.prefixConnectRequest) && !request.startsWith(Protocole.prefixDeconnectRequest))
 					continue;
-				
+
 				//cas requete de connexion, il faut lui envoyer la liste des clients disponibles pour le partage de donnees
 				if(request.startsWith(Protocole.prefixConnectRequest)){
 					int clientPort = Integer.parseInt(request.substring(Protocole.prefixConnectRequest.length(), request.length()));
@@ -36,22 +36,22 @@ class Service implements Runnable, Observable{
 					this.actuelClientInfo = tmpString;
 					this.sendContactList();
 					this.listeClients.add(tmpString);
-					this.notifyObserver(tmpString);					
+					this.notifyObserver(tmpString);
 				}//cas requete deconnexion, il faut enlever le client de la liste clients disponibles
 				else if(request.startsWith(Protocole.prefixDeconnectRequest)){
 					this.deconnectClient();
 				}
 			}
 			catch(NullPointerException npe){
-				this.deconnectClient();	
-				//npe.printStackTrace(); 
-				break; 
+				this.deconnectClient();
+				//npe.printStackTrace();
+				break;
 			}
-			catch(SocketException se){ 
-				System.out.println("Socket Closed...");	
+			catch(SocketException se){
+				System.out.println("Socket Closed...");
 				this.deconnectClient();
 				se.printStackTrace();
-				break; 
+				break;
 			}
 			catch(Exception e){ e.printStackTrace(); }
 		}
@@ -77,7 +77,7 @@ class Service implements Runnable, Observable{
 			out.println(Protocole.updateRequest(update));
 			out.flush();
 			out.println(Protocole.clientListEnd);
-			out.flush(); 	 
+			out.flush();
 		}
 		catch(IOException e){ e.printStackTrace(); }
 	}
@@ -100,7 +100,7 @@ class Service implements Runnable, Observable{
 
 	//informe le ServeurCentrale de la deconnexion d'un client lui confiant les taches qu'une deconnexion implique
 	public void deconnectClient(){
-		this.nombreClients--;	
+		this.nombreClients--;
 		this.notifyObserver(Protocole.deconnectFromServer(this.actuelClientInfo));
 	}
 }

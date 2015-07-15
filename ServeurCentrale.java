@@ -5,11 +5,11 @@ import java.net.InetAddress;
 
 //Usage: java ServeurCentrale tcpPORT
 //Classe qui modelise un Serveur centralisant toutes les informations sur les clients qui veulent
-//partager des donnees.	
+//partager des donnees.
 public class ServeurCentrale implements Observer{
 	private ArrayList<Service> listeClients;
 	private ArrayList<String> listeClientsStr;
-	private int tcpPort; 
+	private int tcpPort;
 	private int nombreConnexions;
 
 	public ServeurCentrale(int port){
@@ -18,13 +18,13 @@ public class ServeurCentrale implements Observer{
 		this.listeClients = new ArrayList<Service>();
 		this.listeClientsStr = null;
 	}
-	
+
 	//demarrage ServeurCentrale
 	public void runServeur(){
 		ServerSocket serverSocket = null;
-		try{ 
+		try{
 			serverSocket = new ServerSocket(this.tcpPort);
-			System.out.println("**************************************************************"); 
+			System.out.println("**************************************************************");
 			System.out.println(" Server Address: "+InetAddress.getLocalHost());
 			System.out.println("**************************************************************");
 		}
@@ -48,7 +48,7 @@ public class ServeurCentrale implements Observer{
 	//A chaque nouvelle connexion d'un client, on met a jour tous les autres clients...
 	public void updateClients(String update){
 		for(Service s : this.listeClients){
-			//mais pas lui meme! 
+			//mais pas lui meme!
 			if(s == this.listeClients.get(this.listeClients.size()-1))
 				continue;
 			s.updateClient(update);
@@ -64,7 +64,7 @@ public class ServeurCentrale implements Observer{
 				System.out.println("Deconnexion CLIENT "+str.substring(Protocole.prefixDeconnectRequest.length(),str.length()));
 				for(int i = 0 ; i < this.listeClientsStr.size(); i++){
 					if(this.listeClientsStr.get(i).equals(str.substring(Protocole.prefixDeconnectRequest.length(), str.length()))){
-						if(this.listeClientsStr.size() > 1){	
+						if(this.listeClientsStr.size() > 1){
 							this.listeClients.remove(i);
 							this.listeClientsStr.remove(i);
 						}
@@ -75,11 +75,11 @@ public class ServeurCentrale implements Observer{
 						this.nombreConnexions--;
 					}
 				}
-			}catch(NullPointerException npe){ 
+			}catch(NullPointerException npe){
 				System.out.println("All Clients Deconnected...");
 				System.exit(0);
-			}		
-	 
+			}
+
 			return;
 		}
 		//Sinon on a un update a faire
@@ -88,11 +88,11 @@ public class ServeurCentrale implements Observer{
 		if(this.listeClientsStr == null)
 			this.listeClientsStr = new ArrayList<String>();
 		else{
-			
+
 			for(String tmp: this.listeClientsStr)
 				if(tmp.equals(str)) estDansListe = true;
 		}
-		if(!estDansListe) this.listeClientsStr.add(str);	
+		if(!estDansListe) this.listeClientsStr.add(str);
 	}
 
 	public static void main(String args[]){
@@ -104,6 +104,3 @@ public class ServeurCentrale implements Observer{
 interface Observer{
 	public void update(String str);
 }
-
-
-	
