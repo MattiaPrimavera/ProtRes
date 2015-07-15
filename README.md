@@ -1,6 +1,6 @@
 # ProtRes
 
-## Usage :
+## Usage
 
 Démarrer en premier le Serveur :
 
