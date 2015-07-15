@@ -3,10 +3,10 @@
 
 ## Usage: 
 
-* Démarrer en premier le Serveur:
+Démarrer en premier le Serveur:
 	java ServeurCentrale tcpPORT
 
-* Puis démarrer chaque client:
+Puis démarrer chaque client:
 	java Client serverAddress tcpServerPort udpServerPort data
 
 ## Synopsis
