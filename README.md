@@ -1,11 +1,11 @@
 # ProtRes
 
-Usage: 
+## Usage :
 
-Démarrer en premier le Serveur:
---> java ServeurCentrale tcpPORT
+Démarrer en premier le Serveur :
 
-Puis démarrer chaque client:
---> java Client serverAddress tcpServerPort udpServerPort donnees
+    java ServeurCentrale tcpPORT
 
+Puis démarrer chaque client :
 
+    java Client serverAddress tcpServerPort udpServerPort donnees
