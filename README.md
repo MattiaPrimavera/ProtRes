@@ -19,10 +19,8 @@ Each pair has an information to share, in this software a text, let's say his ow
 
 This way at the end of the exchange process, each participant to the network knows every other participant's favourite song. 
 
-The combination of **CTRL+C** keys or an **program interrupt signal** on a client make him disconnect from the network after notifying the server.  
+The combination of `CTRL+C` keys or an **program interrupt signal** on a client make him disconnect from the network after notifying the server.
 
 ## Evolution
 
 A few modifications to the code could make this software easily develop to support other format of data exchange, including our personal pictures, audio or video content. In this case, the automatic process of sharing implemented here should be changed to allow the pair to choose the file to get and which pair to download from, in order to avoid the possibility of a consistent but undesired network automatic exchange. 
-
-
