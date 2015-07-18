@@ -1,7 +1,7 @@
 # ProtRes
 
 
-## Usage: 
+## Usage
 
 First, you need to start the Server:
 
